@@ -7,7 +7,6 @@ import com.abhirambsn.studentmanagementsystem.models.Department;
 import com.abhirambsn.studentmanagementsystem.models.Faculty;
 import com.abhirambsn.studentmanagementsystem.repositories.CourseRepository;
 import com.abhirambsn.studentmanagementsystem.repositories.DepartmentRepository;
-import com.abhirambsn.studentmanagementsystem.repositories.FacultyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
