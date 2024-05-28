@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: StudentManagementSystem
+  datasource:
+    url: jdbc:postgresql://localhost:15432/student-mgt
+    username: postgres
+    password: Pg@2024
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+api:
+  endpoint:
+    base-url: ""
