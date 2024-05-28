@@ -16,13 +16,11 @@ import java.util.List;
 public class CourseService {
     private final CourseRepository courseRepository;
     private final DepartmentRepository departmentRepository;
-    private final FacultyRepository facultyRepository;
     private final CourseMapper courseMapper;
 
-    public CourseService(CourseRepository courseRepository, DepartmentRepository departmentRepository, FacultyRepository facultyRepository, CourseMapper courseMapper) {
+    public CourseService(CourseRepository courseRepository, DepartmentRepository departmentRepository, CourseMapper courseMapper) {
         this.courseRepository = courseRepository;
         this.departmentRepository = departmentRepository;
-        this.facultyRepository = facultyRepository;
         this.courseMapper = courseMapper;
     }
 
