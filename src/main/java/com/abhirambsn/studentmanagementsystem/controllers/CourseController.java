@@ -1,15 +1,17 @@
 package com.abhirambsn.studentmanagementsystem.controllers;
 
 import com.abhirambsn.studentmanagementsystem.dto.CourseDto;
-import com.abhirambsn.studentmanagementsystem.dto.FacultyAssignmentDto;
+import com.abhirambsn.studentmanagementsystem.dto.FacultyResponseDto;
 import com.abhirambsn.studentmanagementsystem.models.Course;
 import com.abhirambsn.studentmanagementsystem.models.Faculty;
 import com.abhirambsn.studentmanagementsystem.services.CourseService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 public class CourseController {
     private final CourseService courseService;
 
@@ -18,24 +20,24 @@ public class CourseController {
     }
 
     @PostMapping("/courses")
-    public Course addNewCourse(
+    public ResponseEntity<Course> addNewCourse(
             @RequestBody CourseDto courseDto
     ) {
-        return courseService.addNewCourse(courseDto);
+        return ResponseEntity.ok(courseService.addNewCourse(courseDto));
     }
 
     @GetMapping("/courses/{departmentId}")
-    public List<Course> getCoursesByDepartment(
+    public ResponseEntity<List<Course>> getCoursesByDepartment(
             @PathVariable String departmentId
     ) {
-        return courseService.getCoursesByDepartment(departmentId);
+        return ResponseEntity.ok(courseService.getCoursesByDepartment(departmentId));
     }
 
     @GetMapping("/course/{courseId}/faculty")
-    public List<Faculty> getFacultyOfCourse(
+    public ResponseEntity<List<FacultyResponseDto>> getFacultyOfCourse(
             @PathVariable String courseId
     ) {
-        return courseService.getFacultyOfCourse(courseId);
+        return ResponseEntity.ok(courseService.getFacultyOfCourse(courseId));
     }
 
     @DeleteMapping("/course/{courseId}")
@@ -46,23 +48,23 @@ public class CourseController {
     }
 
     @PutMapping("/course/{courseId}/deactivate")
-    public boolean deactivateCourse(
+    public ResponseEntity<Boolean> deactivateCourse(
             @PathVariable String courseId
     ) {
-        return courseService.deactivateCourse(courseId);
+        return ResponseEntity.ok(courseService.deactivateCourse(courseId));
     }
 
     @PutMapping("/course/{courseId}/activate")
-    public boolean activateCourse(
+    public ResponseEntity<Boolean> activateCourse(
             @PathVariable String courseId
     ) {
-        return courseService.reactivateCourse(courseId);
+        return ResponseEntity.ok(courseService.reactivateCourse(courseId));
     }
 
     @GetMapping("/course/{courseId}")
-    public Course getCourse(
+    public ResponseEntity<Course> getCourse(
             @PathVariable String courseId
     ) {
-        return courseService.getCourse(courseId);
+        return ResponseEntity.ok(courseService.getCourse(courseId));
     }
 }

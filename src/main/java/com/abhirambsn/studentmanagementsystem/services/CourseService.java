@@ -1,7 +1,9 @@
 package com.abhirambsn.studentmanagementsystem.services;
 
 import com.abhirambsn.studentmanagementsystem.dto.CourseDto;
+import com.abhirambsn.studentmanagementsystem.dto.FacultyResponseDto;
 import com.abhirambsn.studentmanagementsystem.mappers.CourseMapper;
+import com.abhirambsn.studentmanagementsystem.mappers.FacultyMapper;
 import com.abhirambsn.studentmanagementsystem.models.Course;
 import com.abhirambsn.studentmanagementsystem.models.Department;
 import com.abhirambsn.studentmanagementsystem.models.Faculty;
@@ -16,11 +18,13 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final DepartmentRepository departmentRepository;
     private final CourseMapper courseMapper;
+    private final FacultyMapper facultyMapper;
 
-    public CourseService(CourseRepository courseRepository, DepartmentRepository departmentRepository, CourseMapper courseMapper) {
+    public CourseService(CourseRepository courseRepository, DepartmentRepository departmentRepository, CourseMapper courseMapper, FacultyMapper facultyMapper) {
         this.courseRepository = courseRepository;
         this.departmentRepository = departmentRepository;
         this.courseMapper = courseMapper;
+        this.facultyMapper = facultyMapper;
     }
 
     public boolean deactivateCourse(String course_code) {
@@ -66,7 +70,11 @@ public class CourseService {
         courseRepository.deleteById(course_code);
     }
 
-    public List<Faculty> getFacultyOfCourse(String course_code) {
-        return courseRepository.findById(course_code).orElseThrow().getFaculties();
+    public List<FacultyResponseDto> getFacultyOfCourse(String course_code) {
+        return courseRepository.findById(course_code)
+                .orElseThrow()
+                .getFaculties()
+                .stream().map(facultyMapper::fromFaculty)
+                .toList();
     }
 }

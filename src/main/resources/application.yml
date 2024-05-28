@@ -1,6 +1,11 @@
 spring:
   application:
     name: StudentManagementSystem
+    security:
+      jwt:
+        secret_key: "TXlTdXBlclNlY3JldEtleUNyYWNrTWVJZllvdUNhbkl0SXNBVmVyeUxvbmdLZXlYRHhEeERIYUhhSGEK"
+        expiration: 3600
+        refresh_expiration: 86400
   datasource:
     url: jdbc:postgresql://localhost:15432/student-mgt
     username: postgres
@@ -10,11 +15,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
-
-api:
-  endpoint:
-    base-url: ""

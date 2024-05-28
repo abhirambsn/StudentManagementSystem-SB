@@ -3,9 +3,11 @@ package com.abhirambsn.studentmanagementsystem.controllers;
 import com.abhirambsn.studentmanagementsystem.dto.FacultyDto;
 import com.abhirambsn.studentmanagementsystem.dto.FacultyResponseDto;
 import com.abhirambsn.studentmanagementsystem.services.FacultyService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1")
 public class FacultyController {
     private final FacultyService facultyService;
 
@@ -14,24 +16,24 @@ public class FacultyController {
     }
 
     @PostMapping("/faculty")
-    public FacultyResponseDto registerFaculty(
+    public ResponseEntity<FacultyResponseDto> registerFaculty(
             @RequestBody FacultyDto facultyDto
             ) {
-        return facultyService.registerFaculty(facultyDto);
+        return ResponseEntity.ok(facultyService.registerFaculty(facultyDto));
     }
 
     @GetMapping("/faculty/{faculty_id}")
-    public FacultyResponseDto getFaculty(
+    public ResponseEntity<FacultyResponseDto> getFaculty(
             @PathVariable String faculty_id
     ) {
-        return facultyService.getFaculty(faculty_id);
+        return ResponseEntity.ok(facultyService.getFaculty(faculty_id));
     }
 
     @PutMapping("/faculty/{faculty_id}/course/{course_code}")
-    public boolean assignCourseToFaculty(
+    public ResponseEntity<Boolean> assignCourseToFaculty(
             @PathVariable String course_code,
             @PathVariable String faculty_id
     ) {
-        return facultyService.assignCourseToFaculty(course_code, faculty_id);
+        return ResponseEntity.ok(facultyService.assignCourseToFaculty(course_code, faculty_id));
     }
 }

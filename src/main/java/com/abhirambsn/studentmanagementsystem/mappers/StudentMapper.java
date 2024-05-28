@@ -5,10 +5,17 @@ import com.abhirambsn.studentmanagementsystem.dto.StudentResponseDto;
 import com.abhirambsn.studentmanagementsystem.models.Address;
 import com.abhirambsn.studentmanagementsystem.models.Student;
 import com.abhirambsn.studentmanagementsystem.util.IdGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentMapper {
+
+    private final PasswordEncoder passwordEncoder;
+
+    public StudentMapper(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Student toStudent(StudentDto studentDto) {
         Student student = new Student();
@@ -42,8 +49,11 @@ public class StudentMapper {
 
         // Credentials
         String initPassword = IdGenerator.generateRandomPassword(studentDto.first_name(), studentDto.last_name());
+        String initPwHash = passwordEncoder.encode(initPassword);
         student.setUsername(enrolmentNumber);
-        student.setPassword(initPassword);
+        student.setPassword(initPwHash);
+
+        System.out.println("Credentials of " + student.getId() + " are: " + student.getUsername() + " " + initPassword);
 
         student.setYear_of_joining(studentDto.year_of_joining());
         student.setHas_hostel(studentDto.has_hostel());

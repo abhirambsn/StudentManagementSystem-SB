@@ -5,12 +5,19 @@ import com.abhirambsn.studentmanagementsystem.dto.FacultyResponseDto;
 import com.abhirambsn.studentmanagementsystem.models.Course;
 import com.abhirambsn.studentmanagementsystem.models.Faculty;
 import com.abhirambsn.studentmanagementsystem.util.IdGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class FacultyMapper {
+    private final PasswordEncoder passwordEncoder;
+
+    public FacultyMapper(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     public Faculty toFaculty(FacultyDto facultyDto) {
         Faculty faculty = new Faculty();
         String employee_id = IdGenerator.generateFacultyId(facultyDto.department_id());
@@ -27,7 +34,10 @@ public class FacultyMapper {
         // Credentials
         faculty.setUsername(employee_id);
         String initPassword = IdGenerator.generateRandomPassword(facultyDto.first_name(), facultyDto.last_name());
-        faculty.setPassword(initPassword);
+        String initPwHash = passwordEncoder.encode(initPassword);
+        faculty.setPassword(initPwHash);
+
+        System.out.println("Credentials of " + faculty.getId() + " are: " + faculty.getUsername() + " " + initPassword);
 
         return faculty;
     }
