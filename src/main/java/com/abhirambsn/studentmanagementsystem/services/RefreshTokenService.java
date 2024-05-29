@@ -25,6 +25,7 @@ public class RefreshTokenService {
     private Long expiryDuration;
 
     public RefreshToken buildRefreshToken(String username) {
+        refreshTokenRepository.findByUsername(username).ifPresent(refreshTokenRepository::delete);
         RefreshToken refreshToken = RefreshToken.builder()
                 .user(userRepository.findById(username).orElseThrow())
                 .token(UUID.randomUUID().toString())

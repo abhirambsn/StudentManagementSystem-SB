@@ -1,6 +1,5 @@
 package com.abhirambsn.studentmanagementsystem.services;
 
-import ch.qos.logback.core.util.StringUtil;
 import com.abhirambsn.studentmanagementsystem.config.JwtService;
 import com.abhirambsn.studentmanagementsystem.dto.AuthResponseDto;
 import com.abhirambsn.studentmanagementsystem.dto.RefreshTokenDto;
@@ -12,7 +11,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
 
 @Service
 public class AuthenticationService {
@@ -40,6 +38,7 @@ public class AuthenticationService {
                 () -> new RuntimeException("User not found")
         );
         var jwtToken = jwtService.generateToken(null, user);
+
         RefreshToken token = refreshTokenService.buildRefreshToken(user.getUsername());
         return new AuthResponseDto(jwtToken, token.getToken());
     }

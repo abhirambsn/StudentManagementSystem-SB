@@ -21,7 +21,7 @@ public class RefreshToken {
     private String token;
     private Instant expiryDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "username")
     private User user;
 }

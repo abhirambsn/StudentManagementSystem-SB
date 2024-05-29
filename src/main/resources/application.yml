@@ -7,7 +7,7 @@ spring:
         expiration: 3600
         refresh_expiration: 86400
   datasource:
-    url: jdbc:postgresql://localhost:15432/student-mgt
+    url: jdbc:postgresql://192.168.1.3:15432/student-mgt
     username: postgres
     password: Pg@2024
     driver-class-name: org.postgresql.Driver
@@ -19,3 +19,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
