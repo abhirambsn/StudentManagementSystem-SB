@@ -3,6 +3,7 @@ package com.abhirambsn.studentmanagementsystem.mappers;
 import com.abhirambsn.studentmanagementsystem.dto.StudentDto;
 import com.abhirambsn.studentmanagementsystem.dto.StudentResponseDto;
 import com.abhirambsn.studentmanagementsystem.models.Address;
+import com.abhirambsn.studentmanagementsystem.models.Role;
 import com.abhirambsn.studentmanagementsystem.models.Student;
 import com.abhirambsn.studentmanagementsystem.util.IdGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +32,7 @@ public class StudentMapper {
         student.setGender(studentDto.gender());
         student.setEmail(studentDto.email());
         student.setPhone_number(studentDto.phone_number());
+        student.setRole(Role.STUDENT);
 
         Address addr = new Address();
         addr.setLine1(studentDto.line1());

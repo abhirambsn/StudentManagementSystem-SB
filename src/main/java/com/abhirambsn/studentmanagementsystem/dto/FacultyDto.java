@@ -10,6 +10,7 @@ public record FacultyDto(
         String phone_number,
         Date date_of_birth,
         Date date_of_joining,
-        String department_id
+        String department_id,
+        String designation
 ) {
 }

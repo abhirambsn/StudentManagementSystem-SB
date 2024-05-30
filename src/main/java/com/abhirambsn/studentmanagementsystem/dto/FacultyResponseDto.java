@@ -13,6 +13,7 @@ public record FacultyResponseDto(
         Date date_of_birth,
         Date date_of_joining,
         String department_name,
+        String designation,
         List<String> courses
 ) {
 }

@@ -57,6 +57,13 @@ public class IdGenerator {
         return department_code + faculty_id;
     }
 
+    public static String generateAdminId() {
+        // Generate 4 Random Digits
+        String admin_id = String.valueOf((int) (Math.random() * 10000));
+
+        return "ADM" + admin_id;
+    }
+
     public static String generateCourseCode(String department_code, String program_id, int year_of_start) {
         // Get Department Code
         String department_code_2_digits = department_code_course_map.get(department_code);
@@ -68,10 +75,6 @@ public class IdGenerator {
         String course_id = String.valueOf((int) (Math.random() * 1000));
 
         return year_of_start_last_2_digits + program_id_1_digit + department_code_2_digits + course_id;
-    }
-
-    public static String generateUsernameFaculty(String first_name, String last_name) {
-        return first_name.toLowerCase() + "." + last_name.toLowerCase();
     }
 
     public static String generateRandomPassword(String first_name, String last_name) {

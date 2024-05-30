@@ -4,6 +4,7 @@ import com.abhirambsn.studentmanagementsystem.dto.FacultyDto;
 import com.abhirambsn.studentmanagementsystem.dto.FacultyResponseDto;
 import com.abhirambsn.studentmanagementsystem.models.Course;
 import com.abhirambsn.studentmanagementsystem.models.Faculty;
+import com.abhirambsn.studentmanagementsystem.models.Role;
 import com.abhirambsn.studentmanagementsystem.util.IdGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class FacultyMapper {
         faculty.setPhone_number(facultyDto.phone_number());
         faculty.setDate_of_birth(facultyDto.date_of_birth());
         faculty.setDate_of_joining(facultyDto.date_of_joining());
+        faculty.setDesignation(facultyDto.designation());
+        faculty.setRole(Role.FACULTY);
 
         // Credentials
         faculty.setUsername(employee_id);
@@ -55,6 +58,7 @@ public class FacultyMapper {
                     faculty.getDate_of_birth(),
                     faculty.getDate_of_joining(),
                     faculty.getDepartment().getDepartment_name(),
+                    faculty.getDesignation(),
                     List.of()
             );
         } else {
@@ -68,6 +72,7 @@ public class FacultyMapper {
                     faculty.getDate_of_birth(),
                     faculty.getDate_of_joining(),
                     faculty.getDepartment().getDepartment_name(),
+                    faculty.getDesignation(),
                     faculty.getCourses().stream().map(Course::getCourse_name).toList()
             );
         }

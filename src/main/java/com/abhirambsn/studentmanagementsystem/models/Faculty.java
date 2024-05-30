@@ -35,6 +35,9 @@ public class Faculty extends User {
     @Column(nullable = false, unique = true)
     private String phone_number;
 
+    @Column(nullable = false)
+    private String designation;
+
     @ManyToOne
     @JoinColumn(name = "department_id")
     @JsonManagedReference
